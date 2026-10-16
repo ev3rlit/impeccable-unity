@@ -1,0 +1,263 @@
+<!-- Modified for the unofficial Unity UI Toolkit adaptation maintained by ev3rlit, 2026-10-16. Based on Impeccable by Paul Bakaus and contributors (Apache-2.0). See NOTICE and MODIFICATIONS.md. -->
+
+# 공식 Impeccable 사례의 Unity 전환안
+
+원본 확인일: 2026-10-16. 원본은 공식 문서와 [홈페이지 명령 데모](https://impeccable.style/)다. 아래는 원본 사례를 Unity에 옮기는 제안이며 명령 수행·렌더링·성능 측정 결과가 아니다.
+
+`illustrated-example`은 공식 페이지의 저작된 시각·인터랙션·권고 예시다. `workflow-example`은 문서·브리프·코드 통합·진단 사례이며 시각 전후 화면을 꾸며내지 않는다. 이 사례 묶음은 기존 팔레트·폰트·카드 스타일을 보존하는 개선 요청을 다룬다. 사례의 색·카드 수·배치를 모든 프로젝트에 강제하지 않는다. 실제 프로젝트에서는 사용자가 정한 아트 방향과 명령 범위를 따른다.
+
+| 명령 | 원본 유형 | 결과 종류 | Unity 전환안 |
+| --- | --- | --- | --- |
+| [init](https://impeccable.style/docs/init/) | workflow-example | document | 게임 비교 데모의 장비·상점 화면에서 누가 어떤 입력으로 무엇을 결정하는지 제품 맥락으로 정리한다. |
+| [shape](https://impeccable.style/docs/shape/) | workflow-example | document | 설정에서 음량을 줄이되 전체 음소거에 의존하지 않는 조작 흐름을 구현 전에 구체화한다. |
+| [document](https://impeccable.style/docs/document/) | workflow-example | document | 현재 장비·상점·설정의 UXML·USS에서 기존 팔레트·폰트·여백·카드와 버튼 규칙을 추출해 기록한다. |
+| [extract](https://impeccable.style/docs/extract/) | workflow-example | code | 상점 구매·장비 장착·스킬 해금에 반복되는 주 동작 버튼의 스타일과 상태를 공통 USS·컨트롤로 모은다. |
+| [critique](https://impeccable.style/docs/critique/) | illustrated-example | diagnostic | 상점 구매 카드에서 비용·잔여 골드를 읽기 전에 구매 버튼이 시선을 차지하는 문제를 진단한다. |
+| [audit](https://impeccable.style/docs/audit/) | workflow-example | diagnostic | 스킬 해금 버튼에 키보드 포커스는 도달하지만 시각 표시가 없는 UI Toolkit 계약을 조사한다. |
+| [layout](https://impeccable.style/docs/layout/) | illustrated-example | visual | 화질·언어·음량 설정에서 각 라벨과 대응 컨트롤의 묶음을 여백으로 드러낸다. |
+| [typeset](https://impeccable.style/docs/typeset/) | illustrated-example | visual | 스킬 상세의 이름·효과·조건·비용이 같은 무게로 보이는 상태를 기존 폰트 안에서 개선한다. |
+| [colorize](https://impeccable.style/docs/colorize/) | illustrated-example | visual | 장비 목록의 장착됨·보유·장착 불가 상태에 기존 의미색 토큰을 일관되게 배정한다. |
+| [clarify](https://impeccable.style/docs/clarify/) | illustrated-example | interaction | 상태 실험실의 목록 불러오기 오류를 실패한 작업과 실제 재시도 동작에 맞춰 고친다. |
+| [polish](https://impeccable.style/docs/polish/) | illustrated-example | visual | 전투 결과 카드의 중복 분류·미세 정렬·버튼 상태를 정해진 목록으로 다듬는다. |
+| [distill](https://impeccable.style/docs/distill/) | illustrated-example | interaction | 상점 구매 카드에서 보조 상세를 접되 비용·잔여 골드·구매와 불가 사유는 유지한다. |
+| [bolder](https://impeccable.style/docs/bolder/) | illustrated-example | visual | 장비 비교에서 선택한 장비의 이름·주 능력·장착 행동을 기존 디자인 안에서 앞세운다. |
+| [quieter](https://impeccable.style/docs/quieter/) | illustrated-example | visual | 상점 카드의 효과·보조 수치·배지가 구매 버튼과 경쟁하는 강도를 줄인다. |
+| [adapt](https://impeccable.style/docs/adapt/) | illustrated-example | interaction | 장비 목록의 넓은 행을 420px 비교 패널에서 장비 요약과 충분한 장착 행동으로 재배치한다. |
+| [harden](https://impeccable.style/docs/harden/) | illustrated-example | interaction | 설정 변경을 적용하는 실패 상태에서도 편집 중 값·선택을 보존하고 중복 적용을 막는 흐름을 구성한다. |
+| [animate](https://impeccable.style/docs/animate/) | illustrated-example | interaction | 장비를 장착했을 때 목록 항목과 장착 슬롯의 상태 변화가 이어지도록 짧은 피드백을 준다. |
+| [delight](https://impeccable.style/docs/delight/) | illustrated-example | interaction | 첫 스킬 해금 성공에 기존 카드·강조선만으로 짧고 되돌릴 수 있는 성취 피드백을 붙인다. |
+| [onboard](https://impeccable.style/docs/onboard/) | illustrated-example | interaction | 첫 장비 화면에서 명확히 표시한 데모 장비로 비교·장착을 한 번 해볼 수 있게 안내한다. |
+| [overdrive](https://impeccable.style/docs/overdrive/) | illustrated-example | interaction | 스킬 트리에서 선택 경로가 연속적으로 이어지고 초점이 부드럽게 이동하는 한 가지 효과를 기존 아트 안에서 실험한다. |
+| [optimize](https://impeccable.style/docs/optimize/) | illustrated-example | performance | 상태·대량 목록 실험실의 닫힌 대량 목록을 화면 진입 때 전부 만들지 않고 최초로 열 때 준비한다. |
+
+## init
+
+원본: [공식 init 사례](https://impeccable.style/docs/init/) · workflow-example
+
+- 원본 시작 상태: 카페 관리자의 주문 상황·목적·납기 제약이 에이전트에게 명확히 기록되지 않은 상태.
+- 원본 변화·산출물: 휴대폰으로 반복 주문하는 사용자, 수량 조정, 결제 전 납기 확인을 PRODUCT.md에 합의된 사실로 기록한다.
+- Unity 적용 시나리오: 게임 비교 데모의 장비·상점 화면에서 누가 어떤 입력으로 무엇을 결정하는지 제품 맥락으로 정리한다.
+- 문제: 추측한 사용자·목표·제약이 화면 판단의 근거가 된다.
+- 수용 기준: 기존 제품·코드·에셋에서 확인한 사실과 미정 항목을 구분한다. 데스크톱 마우스·키보드, 데모 골드, 구매 전 비용 확인 등 확인된 제약을 PRODUCT.md에 담는다. 팔레트·폰트·카드 스타일과 UI 구현을 변경하지 않는다.
+- 결과 종류: document
+
+## shape
+
+원본: [공식 shape 사례](https://impeccable.style/docs/shape/) · workflow-example
+
+- 원본 시작 상태: 이메일을 덜 받고 싶다는 아이디어만 있고 흐름·상태·유지할 선택이 정해지지 않았다.
+- 원본 변화·산출물: 주제와 빈도를 함께 보고 한 번 저장하며, 전체 구독 해지도 유지하는 브리프를 확정한다. 실제 주제·주기는 미정으로 남긴다.
+- Unity 적용 시나리오: 설정에서 음량을 줄이되 전체 음소거에 의존하지 않는 조작 흐름을 구현 전에 구체화한다.
+- 문제: 사용 목적만 있고 저장·취소·실패·현재 값의 관계가 불분명하다.
+- 수용 기준: 사용자 작업, 필요한 상태, 범위와 유지할 기능을 브리프로 보여준다. 실제 지원하는 음량 항목과 적용 방식은 기존 코드에서 확인하고 미확인 항목을 표시한다. 확정 전 UXML·USS·C# 구현을 만들지 않는다.
+- 결과 종류: document
+
+## document
+
+원본: [공식 document 사례](https://impeccable.style/docs/document/) · workflow-example
+
+- 원본 시작 상태: 화면에는 주 동작용 녹색 버튼이 있지만 값과 사용 원칙이 별도 기록에 연결되지 않았다.
+- 원본 변화·산출물: 실제 버튼의 색 토큰과 주·보조 동작 역할, 키보드 포커스 원칙을 DESIGN.md에 연결해 기록한다.
+- Unity 적용 시나리오: 현재 장비·상점·설정의 UXML·USS에서 기존 팔레트·폰트·여백·카드와 버튼 규칙을 추출해 기록한다.
+- 문제: 현재 디자인이 다음 작업에 재사용할 명시적 규칙으로 남아 있지 않다.
+- 수용 기준: USS 값·폰트 에셋·공통 컨트롤과 문서 항목의 대응을 보여준다. 우연한 불일치와 의도된 변형을 구분해 표시한다. 새 시각 정체성을 선택하거나 UI 값을 바꾸지 않는다.
+- 결과 종류: document
+
+## extract
+
+원본: [공식 extract 사례](https://impeccable.style/docs/extract/) · workflow-example
+
+- 원본 시작 상태: 주문 확인·계정 저장·공급자 추가의 주 버튼이 세 화면에 중복 구현되어 있다.
+- 원본 변화·산출물: 공통 주 버튼에 스타일·상태를 모으되 각 화면의 문구와 동작은 유지한다.
+- Unity 적용 시나리오: 상점 구매·장비 장착·스킬 해금에 반복되는 주 동작 버튼의 스타일과 상태를 공통 USS·컨트롤로 모은다.
+- 문제: 같은 역할의 구현이 흩어져 수정 시 상태·여백이 달라진다.
+- 수용 기준: 세 곳 이상에서 같은 의도의 반복을 코드로 확인한다. 공통 토큰·컨트롤과 호출부 변경을 함께 보여준다. 각 라벨·콜백·비활성 사유와 시각 형태를 유지하며 미래용 옵션을 추가하지 않는다.
+- 결과 종류: code
+
+## critique
+
+원본: [공식 critique 사례](https://impeccable.style/docs/critique/) · illustrated-example
+
+- 원본 시작 상태: 결제 버튼이 총액보다 먼저 주목을 받는 주문 요약.
+- 원본 변화·산출물: 총액을 먼저 읽게 하고 버튼에도 금액을 넣으라는 권고를 제시한다. 화면 자체는 자동 수정하지 않는다.
+- Unity 적용 시나리오: 상점 구매 카드에서 비용·잔여 골드를 읽기 전에 구매 버튼이 시선을 차지하는 문제를 진단한다.
+- 문제: 플레이어가 비용을 이해하기 전에 결제에 해당하는 행동으로 유도된다.
+- 수용 기준: 문제 위치·사용자 영향·우선순위·유지할 강점을 보여준다. 비용 우선 배치와 구체적 구매 라벨을 권고로 제시한다. 결과는 진단이며 UXML·USS·C#에 수정을 적용하지 않는다.
+- 결과 종류: diagnostic
+
+## audit
+
+원본: [공식 audit 사례](https://impeccable.style/docs/audit/) · workflow-example
+
+- 원본 시작 상태: 탭으로 결제 버튼에 도달하지만 선택 상태가 보이지 않는 구현.
+- 원본 변화·산출물: 보이는 키보드 포커스가 없다는 P1 진단과 전체 흐름 확인 방법을 보고한다. 공식 문서의 가상 진단 예시다.
+- Unity 적용 시나리오: 스킬 해금 버튼에 키보드 포커스는 도달하지만 시각 표시가 없는 UI Toolkit 계약을 조사한다.
+- 문제: 키보드 사용자가 현재 조작 대상을 식별하기 어렵다.
+- 수용 기준: 해당 컨트롤·포커스 스타일·탐색 경로의 정적 근거를 제시한다. 접근성·테마·대응 레이아웃·불필요한 작업을 심각도와 함께 구분한다. 수정은 적용하지 않고 Editor 미실행으로 확인하지 못한 범위를 명시한다.
+- 결과 종류: diagnostic
+
+## layout
+
+원본: [공식 layout 사례](https://impeccable.style/docs/layout/) · illustrated-example
+
+- 원본 시작 상태: 알림 종류와 빈도 사이의 간격이 항목 간 간격과 같아 짝이 흐릿하다.
+- 원본 변화·산출물: 라벨·컨트롤 내부 간격은 줄이고 설정 사이 간격은 늘려 같은 내용·순서를 묶는다.
+- Unity 적용 시나리오: 화질·언어·음량 설정에서 각 라벨과 대응 컨트롤의 묶음을 여백으로 드러낸다.
+- 문제: 어느 값이 어느 설정에 속하는지 빠르게 읽기 어렵다.
+- 수용 기준: 한 설정 내부 간격보다 설정 그룹 사이 간격이 크다. 기존 설정 순서·값·기능과 팔레트·폰트·카드 외형을 유지한다. 좁은 배치에서도 시각 순서와 포커스 순서가 일치하도록 구조를 제시한다.
+- 결과 종류: visual
+
+## typeset
+
+원본: [공식 typeset 사례](https://impeccable.style/docs/typeset/) · illustrated-example
+
+- 원본 시작 상태: 주문 추적 도움말의 제목과 본문이 같은 무게로 이어진다.
+- 원본 변화·산출물: 같은 문구·폰트를 유지하고 크기·굵기·여백으로 제목과 본문을 구분한다.
+- Unity 적용 시나리오: 스킬 상세의 이름·효과·조건·비용이 같은 무게로 보이는 상태를 기존 폰트 안에서 개선한다.
+- 문제: 플레이어가 효과와 해금 조건을 훑어 읽기 어렵다.
+- 수용 기준: 제목·효과·조건·비용 역할에 일관된 크기와 굵기를 부여한다. 기존 한국어 문구·폰트 에셋·색·카드 스타일을 유지한다. 긴 이름과 줄바꿈에서도 정보가 잘리지 않도록 텍스트 설정을 보여준다.
+- 결과 종류: visual
+
+## colorize
+
+원본: [공식 colorize 사례](https://impeccable.style/docs/colorize/) · illustrated-example
+
+- 원본 시작 상태: 발행됨과 초안 상태가 시각적으로 비슷한 게시물 목록.
+- 원본 변화·산출물: 기존 브랜드색으로 발행 상태를 강조하되 상태 라벨을 함께 유지한다.
+- Unity 적용 시나리오: 장비 목록의 장착됨·보유·장착 불가 상태에 기존 의미색 토큰을 일관되게 배정한다.
+- 문제: 상태 라벨을 하나씩 읽기 전에는 장착 상태를 찾기 어렵다.
+- 수용 기준: 승인된 팔레트 안에서 상태별 색 역할을 재사용한다. 장착됨·불가 등의 라벨과 비색상 단서를 유지한다. 중립 배경 전체를 새 색으로 물들이거나 폰트·카드 스타일을 바꾸지 않는다.
+- 결과 종류: visual
+
+## clarify
+
+원본: [공식 clarify 사례](https://impeccable.style/docs/clarify/) · illustrated-example
+
+- 원본 시작 상태: 무슨 작업이 실패했는지 모르는 오류와 의미가 모호한 확인 버튼.
+- 원본 변화·산출물: 변경 저장 실패를 명시하고 재시도 가능한 인터페이스에는 재시도 동작을 정확히 이름 붙인다.
+- Unity 적용 시나리오: 상태 실험실의 목록 불러오기 오류를 실패한 작업과 실제 재시도 동작에 맞춰 고친다.
+- 문제: 오류 문구가 원인·복구 행동을 설명하지 못해 막다른 상태가 된다.
+- 수용 기준: 실패한 작업과 실제 가능한 다음 동작을 짧게 표시한다. 확인되지 않은 네트워크·권한·서버 원인을 단정하지 않는다. 버튼 라벨과 기존 콜백이 일치하고 제품 용어와 기능은 유지된다.
+- 결과 종류: interaction
+
+## polish
+
+원본: [공식 polish 사례](https://impeccable.style/docs/polish/) · illustrated-example
+
+- 원본 시작 상태: 홈페이지 연계 예시는 출시 계획 카드에 중복 분류 라벨·장식 옆선·점멸 상태점이 있고 제목 스캔이 어렵다.
+- 원본 변화·산출물: 원래 작업과 내용을 유지하며 불필요한 장식과 중복 라벨을 정리하고 제목을 읽기 쉽게 다듬는다.
+- Unity 적용 시나리오: 전투 결과 카드의 중복 분류·미세 정렬·버튼 상태를 정해진 목록으로 다듬는다.
+- 문제: 방향은 맞지만 사소한 불일치와 불필요한 마감 장식이 결과 판단을 방해한다.
+- 수용 기준: 명시한 마감 결함만 고치고 결과 수치·보상·주 동작을 보존한다. 기존 레이아웃·팔레트·폰트·카드 스타일을 유지한다. 포커스·비활성·오류 등 수정 대상 상태의 자산·코드 대응을 보여준다.
+- 결과 종류: visual
+- 원본 예시 위치: 문서가 연결하는 [홈페이지 연계 시각 전후 사례](https://impeccable.style/docs/improve-design/#make-a-focused-improvement).
+
+## distill
+
+원본: [공식 distill 사례](https://impeccable.style/docs/distill/) · illustrated-example
+
+- 원본 시작 상태: 결제 화면에 선물 메시지·받는 사람 입력이 항상 펼쳐져 있다.
+- 원본 변화·산출물: 선물 옵션은 펼침 영역으로 남기고 총액과 결제는 계속 보이게 한다.
+- Unity 적용 시나리오: 상점 구매 카드에서 보조 상세를 접되 비용·잔여 골드·구매와 불가 사유는 유지한다.
+- 문제: 가끔 보는 정보가 항상 노출되어 주요 구매 판단을 가린다.
+- 수용 기준: 보조 상세는 명확한 펼침 동작으로 다시 접근할 수 있다. 비용·주 행동·판단에 필요한 효과·조건은 숨기지 않는다. 접고 펼쳐도 기존 선택·구매 규칙·키보드 접근과 카드 스타일을 유지한다.
+- 결과 종류: interaction
+
+## bolder
+
+원본: [공식 bolder 사례](https://impeccable.style/docs/bolder/) · illustrated-example
+
+- 원본 시작 상태: 대표 작업과 나머지 작업이 같은 비중인 포트폴리오 목록.
+- 원본 변화·산출물: 문구·폰트·팔레트를 그대로 두고 대표 프로젝트가 먼저 보이도록 비중과 배치를 조정한다.
+- Unity 적용 시나리오: 장비 비교에서 선택한 장비의 이름·주 능력·장착 행동을 기존 디자인 안에서 앞세운다.
+- 문제: 모든 카드·정보가 같은 강도로 보여 현재 비교 대상이 묻힌다.
+- 수용 기준: 선택 장비가 첫 시선의 대상이 되고 나머지 장비도 계속 접근 가능하다. 고정 팔레트·폰트·카드 테두리·모서리·재질을 보존한다. 강조는 크기·비중·여백·기존 강조 역할에 국한하고 규칙·문구를 바꾸지 않는다.
+- 결과 종류: visual
+
+## quieter
+
+원본: [공식 quieter 사례](https://impeccable.style/docs/quieter/) · illustrated-example
+
+- 원본 시작 상태: 요금제 카드에서 기능 각각과 선택 행동이 모두 강하게 경쟁한다.
+- 원본 변화·산출물: 기능은 차분한 텍스트로 만들고 선택 행동에 기존 브랜드색을 남긴다.
+- Unity 적용 시나리오: 상점 카드의 효과·보조 수치·배지가 구매 버튼과 경쟁하는 강도를 줄인다.
+- 문제: 강조가 분산되어 비용과 구매 행동을 비교하기 어렵다.
+- 수용 기준: 기능·수치는 읽을 수 있게 유지하고 주 행동의 비중을 남긴다. 고정 팔레트·폰트·카드 외형은 유지하며 강조의 사용량만 줄인다. 포커스·오류·장착 불가 상태를 흐리게 만들지 않는다.
+- 결과 종류: visual
+
+## adapt
+
+원본: [공식 adapt 사례](https://impeccable.style/docs/adapt/) · illustrated-example
+
+- 원본 시작 상태: 넓은 주문 표가 주문 번호·상태·작은 추적 행동을 한 행에 담는다.
+- 원본 변화·산출물: 휴대폰에서는 핵심 주문 요약과 더 큰 추적 행동으로 재배치한다.
+- Unity 적용 시나리오: 장비 목록의 넓은 행을 420px 비교 패널에서 장비 요약과 충분한 장착 행동으로 재배치한다.
+- 문제: 데스크톱 열 구조가 좁은 패널에서 잘리고 행동 영역이 작아진다.
+- 수용 기준: 장비명·현재 상태·주 행동을 좁은 폭에서도 사용할 수 있다. 필수 기능과 기존 입력 판정을 보존하고 hover에만 의존하지 않는다. 중간 폭·긴 한국어·포커스 순서를 고려한 UXML·USS 구조를 보여준다.
+- 결과 종류: interaction
+
+## harden
+
+원본: [공식 harden 사례](https://impeccable.style/docs/harden/) · illustrated-example
+
+- 원본 시작 상태: 배달 메모 저장이 실패하면 입력한 초안이 사라진다.
+- 원본 변화·산출물: 실패 후에도 초안을 남겨 같은 입력으로 재시도할 수 있게 한다.
+- Unity 적용 시나리오: 설정 변경을 적용하는 실패 상태에서도 편집 중 값·선택을 보존하고 중복 적용을 막는 흐름을 구성한다.
+- 문제: 오류 뒤 값을 다시 입력해야 하거나 반복 클릭이 겹친 요청을 만든다.
+- 수용 기준: 실패·재시도 뒤에도 사용자의 편집 값을 유지한다. 로딩 중 중복 제출과 닫힌 UI에 도착한 늦은 결과를 처리한다. 긴 한국어·빈 값·권한 변화의 표시와 이벤트 정리 코드를 제시한다.
+- 결과 종류: interaction
+
+## animate
+
+원본: [공식 animate 사례](https://impeccable.style/docs/animate/) · illustrated-example
+
+- 원본 시작 상태: 진행 중 작업을 완료로 바꾸는 순간 항목이 어디로 갔는지 추적하기 어렵다.
+- 원본 변화·산출물: 항목이 열 사이를 이동하는 연속성을 보여준다. 모션 축소 시 상태는 바뀌고 이동만 사라진다.
+- Unity 적용 시나리오: 장비를 장착했을 때 목록 항목과 장착 슬롯의 상태 변화가 이어지도록 짧은 피드백을 준다.
+- 문제: 장착 성공 직후 항목·슬롯 변화의 관계를 놓치기 쉽다.
+- 수용 기준: 어느 장비가 어느 슬롯에 반영됐는지 상태 변화가 드러난다. 반복 입력·중단에도 최종 상태가 맞고 조작을 기다리게 하지 않는다. 모션 축소에서는 이동 없이 동일한 상태·성공 피드백을 제공하며 기존 아트를 유지한다.
+- 결과 종류: interaction
+
+## delight
+
+원본: [공식 delight 사례](https://impeccable.style/docs/delight/) · illustrated-example
+
+- 원본 시작 상태: 첫 재생목록을 자신의 것으로 만들기 전, 레코드와 슬리브를 보여주는 설명용 인터랙션.
+- 원본 변화·산출물: 누르면 레코드가 빠져나와 회전 후 자리 잡고 즉시 되돌릴 수 있다. 실제 명령 수행 기록·음원 재생은 아니다.
+- Unity 적용 시나리오: 첫 스킬 해금 성공에 기존 카드·강조선만으로 짧고 되돌릴 수 있는 성취 피드백을 붙인다.
+- 문제: 의미 있는 첫 성취가 일반 상태 변경과 똑같이 지나간다.
+- 수용 기준: 성공이 확정된 순간에만 반응하고 재시도·실패에는 축하를 보여주지 않는다. 기존 아트 안에서 짧게 표현하며 다음 조작을 지연하지 않는다. 반복·음소거·모션 축소에서도 상태와 행동은 명확하고 피드백을 기다릴 필요가 없다.
+- 결과 종류: interaction
+
+## onboard
+
+원본: [공식 onboard 사례](https://impeccable.style/docs/onboard/) · illustrated-example
+
+- 원본 시작 상태: 빈 보고서 화면이 데이터 연결부터 요구해 사용자가 가치를 경험할 수 없다.
+- 원본 변화·산출물: 샘플임을 표시한 주문 차트로 먼저 탐색하게 한다. 데모는 계정 연결·저장을 하지 않는다.
+- Unity 적용 시나리오: 첫 장비 화면에서 명확히 표시한 데모 장비로 비교·장착을 한 번 해볼 수 있게 안내한다.
+- 문제: 첫 화면의 준비 요구나 빈 상태가 첫 유용한 행동보다 앞선다.
+- 수용 기준: 첫 유용한 행동과 결과를 실제 사용 컨트롤로 체험한다. 샘플 데이터와 데모 상태임을 명시하고 실제 보상·저장으로 오인시키지 않는다. 건너뛰기·중간 이탈·재방문·도움말 재접근을 처리하며 완료 안내를 반복하지 않는다.
+- 결과 종류: interaction
+
+## overdrive
+
+원본: [공식 overdrive 사례](https://impeccable.style/docs/overdrive/) · illustrated-example
+
+- 원본 시작 상태: 정적인 조각 스터디를 회전·변형 가능한 재료처럼 만들자는 공식 요청 예시.
+- 원본 변화·산출물: 수천 점이 접힌 링·구·파형 사이를 흐르며 전환하고 회전한다. 저작된 데모이며 명령 실측 결과는 아니다.
+- Unity 적용 시나리오: 스킬 트리에서 선택 경로가 연속적으로 이어지고 초점이 부드럽게 이동하는 한 가지 효과를 기존 아트 안에서 실험한다.
+- 문제: 선택 경로를 탐색하는 전환이 단절되어 공간 관계와 선택의 감각이 약하다.
+- 수용 기준: 단일 효과의 방향·프레임 예산·지원 범위를 먼저 고정한다. 고정 팔레트·폰트·카드 스타일을 바꾸지 않고 경로 강조와 전환 모션만 확장한다. 키보드·모션 축소·효과 미지원 때도 즉시 선택 가능한 대안을 두며 성능 수치를 꾸미지 않는다.
+- 결과 종류: interaction
+
+## optimize
+
+원본: [공식 optimize 사례](https://impeccable.style/docs/optimize/) · illustrated-example
+
+- 원본 시작 상태: 보고서 진입 시 아직 닫혀 있는 선택 차트의 코드까지 모두 불러온다.
+- 원본 변화·산출물: 페이지와 탐색을 먼저 준비하고 선택 차트 코드는 차트를 열 때 준비한다. 속도 효과는 별도 측정이 필요하다.
+- Unity 적용 시나리오: 상태·대량 목록 실험실의 닫힌 대량 목록을 화면 진입 때 전부 만들지 않고 최초로 열 때 준비한다.
+- 문제: 지금 보이지 않는 선택 UI 작업이 첫 화면의 필요한 작업과 함께 실행된다.
+- 수용 기준: 초기화·생성·바인딩의 작업 수와 대상 코드를 전후로 보여준다. 동일 데이터·환경에서 첫 진입과 첫 열기를 함께 측정할 계획을 명시한다. Unity를 실행하지 않은 결과에는 시간·FPS·개선율을 넣지 않고 미측정으로 표시하며 동작·아트를 보존한다.
+- 결과 종류: performance

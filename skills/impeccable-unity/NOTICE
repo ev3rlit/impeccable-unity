@@ -1,0 +1,36 @@
+Impeccable Unity
+
+An independent, unofficial Unity UI Toolkit adaptation maintained by ev3rlit.
+
+Upstream work: Impeccable
+Original author: Paul Bakaus and contributors
+Source: https://github.com/pbakaus/impeccable
+Based on commit: 5bf0a069dc857e1b5f4b090e004d9d5b231416ca
+Upstream skill version: 4.6.0
+License: Apache License, Version 2.0 (see LICENSE)
+
+This distribution changes platform guidance, command routing and examples for
+Unity UI Toolkit. Modifications and additions were prepared with AI assistance.
+See MODIFICATIONS.md for the scope of changes and source correspondence.
+
+This project is not an official Impeccable or Unity distribution and does not
+claim endorsement by the upstream authors or Unity Technologies. Names are used
+to identify the source work and target platform.
+
+Upstream third-party notice retained for provenance
+------------------------------------------------
+The following notice concerns upstream iOS/Android reference files. Those files
+are not included in this Unity-only distribution. It is retained unchanged below
+for provenance; it does not change this distribution's Apache-2.0 license.
+
+# Third-Party Notices
+
+This project includes content derived from third-party work, used under the terms of its original license.
+
+## Platform Design Skills
+
+The `skill/reference/ios.md` and `skill/reference/android.md` platform reference files are distilled from ehmo's `platform-design-skills` (Apple Human Interface Guidelines and Material Design 3 rules), rewritten in Impeccable's voice.
+
+**Original work:** https://github.com/ehmo/platform-design-skills
+**Original license:** MIT
+**Author:** ehmo

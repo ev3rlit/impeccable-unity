@@ -1,0 +1,5 @@
+# Modified for the unofficial Unity UI Toolkit adaptation maintained by ev3rlit, 2026-10-16. Based on Impeccable by Paul Bakaus and contributors (Apache-2.0). See NOTICE and MODIFICATIONS.md.
+interface:
+  display_name: Impeccable Unity (Unofficial)
+  short_description: Design and improve Unity UI Toolkit interfaces.
+  default_prompt: Use Impeccable Unity to design, critique, audit, or polish this Unity UI Toolkit interface.

@@ -1,0 +1,274 @@
+{
+  "_notice": "Modified for the unofficial Unity UI Toolkit adaptation maintained by ev3rlit, 2026-10-16. Based on Impeccable by Paul Bakaus and contributors (Apache-2.0). See NOTICE and MODIFICATIONS.md.",
+  "commands": {
+    "init": {
+      "description": "Capture confirmed product context",
+      "effect": "document",
+      "references": [
+        "unity-platform",
+        "before-after-cases"
+      ],
+      "writes": [
+        "PRODUCT.md"
+      ]
+    },
+    "shape": {
+      "description": "Discover and confirm a screen brief without implementing it",
+      "effect": "plan",
+      "references": [
+        "unity-design",
+        "unity-uxml",
+        "before-after-cases"
+      ],
+      "writes": []
+    },
+    "document": {
+      "description": "Record the incumbent visual system without redesigning it",
+      "effect": "document",
+      "references": [
+        "unity-uss",
+        "unity-uxml",
+        "before-after-cases"
+      ],
+      "writes": [
+        "DESIGN.md"
+      ]
+    },
+    "extract": {
+      "description": "Consolidate repeated tokens and controls without visual drift",
+      "effect": "edit",
+      "references": [
+        "unity-uss",
+        "unity-uxml",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "scoped UI assets and their callers"
+      ]
+    },
+    "critique": {
+      "description": "Evaluate design and prioritize evidence-backed findings",
+      "effect": "review",
+      "references": [
+        "unity-design",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": []
+    },
+    "audit": {
+      "description": "Inspect technical UI contracts without fixing them",
+      "effect": "review",
+      "references": [
+        "unity-uss",
+        "unity-uxml",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": []
+    },
+    "layout": {
+      "description": "Improve composition, alignment and spacing",
+      "effect": "edit",
+      "references": [
+        "unity-design",
+        "unity-uss",
+        "unity-uxml",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "target UXML and USS"
+      ]
+    },
+    "typeset": {
+      "description": "Improve text hierarchy, font assets and legibility",
+      "effect": "edit",
+      "references": [
+        "unity-design",
+        "unity-uss",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "target USS and text asset configuration"
+      ]
+    },
+    "colorize": {
+      "description": "Apply intentional color roles and semantic tokens",
+      "effect": "edit",
+      "references": [
+        "unity-design",
+        "unity-uss",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "target USS and shared color tokens"
+      ]
+    },
+    "clarify": {
+      "description": "Clarify UI labels and recovery copy without inventing facts",
+      "effect": "edit",
+      "references": [
+        "unity-uxml",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "target copy and existing localization entries"
+      ]
+    },
+    "polish": {
+      "description": "Fix a bounded list of visual and interaction details",
+      "effect": "edit",
+      "references": [
+        "unity-uss",
+        "unity-uxml",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "scoped UI assets"
+      ]
+    },
+    "distill": {
+      "description": "Remove redundant visual and interaction complexity",
+      "effect": "edit",
+      "references": [
+        "unity-design",
+        "unity-uxml",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "scoped UI and affected callers"
+      ]
+    },
+    "bolder": {
+      "description": "Increase impact while preserving usability and the approved world",
+      "effect": "edit",
+      "references": [
+        "unity-design",
+        "unity-uss",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "target composition and USS"
+      ]
+    },
+    "quieter": {
+      "description": "Reduce overstimulation without flattening hierarchy",
+      "effect": "edit",
+      "references": [
+        "unity-design",
+        "unity-uss",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "target composition and USS"
+      ]
+    },
+    "adapt": {
+      "description": "Adapt structure and input to named devices and panel sizes",
+      "effect": "edit",
+      "references": [
+        "unity-platform",
+        "unity-uxml",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "target layout and input presentation"
+      ]
+    },
+    "harden": {
+      "description": "Handle realistic data, failure and UI lifecycle boundaries",
+      "effect": "edit",
+      "references": [
+        "unity-uxml",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "scoped presentation and binding code"
+      ]
+    },
+    "animate": {
+      "description": "Add purposeful state feedback with accessible motion alternatives",
+      "effect": "edit",
+      "references": [
+        "unity-uss",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "target transitions and feedback code"
+      ]
+    },
+    "delight": {
+      "description": "Add a small earned moment without interfering with the task",
+      "effect": "edit",
+      "references": [
+        "unity-design",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "target feedback and assets"
+      ]
+    },
+    "onboard": {
+      "description": "Teach the first meaningful action with a short recoverable flow",
+      "effect": "edit",
+      "references": [
+        "unity-design",
+        "unity-uxml",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "target onboarding flow and existing state integration"
+      ]
+    },
+    "overdrive": {
+      "description": "Implement a requested ambitious effect within design and frame budgets",
+      "effect": "edit",
+      "references": [
+        "unity-design",
+        "unity-uss",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "approved effect and supporting UI assets"
+      ]
+    },
+    "optimize": {
+      "description": "Measure a UI bottleneck and improve it without changing behavior",
+      "effect": "edit",
+      "references": [
+        "unity-uss",
+        "unity-csharp",
+        "unity-review",
+        "before-after-cases"
+      ],
+      "writes": [
+        "measured hot path and supporting UI assets"
+      ]
+    }
+  }
+}

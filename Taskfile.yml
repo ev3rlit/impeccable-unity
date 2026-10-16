@@ -1,0 +1,25 @@
+version: '3'
+silent: true
+tasks:
+  check:
+    desc: Check the standalone skill, attribution and source boundaries
+    cmds:
+      - node --test tests/*.test.mjs
+  install:smoke:
+    desc: Test skills CLI discovery and installation in an isolated temporary project
+    cmds:
+      - node scripts/install-smoke.mjs
+  install:remote:
+    desc: Test installation from the published GitHub repository in a temporary project
+    env:
+      SKILLS_SOURCE: ev3rlit/impeccable-unity
+    cmds:
+      - node scripts/install-smoke.mjs
+  package:
+    desc: Package only the installable skill and its notices
+    deps: [check]
+    cmds:
+      - mkdir -p dist
+      - rm -f dist/impeccable-unity.zip
+      - zip -q -r dist/impeccable-unity.zip skills/impeccable-unity -x '*.DS_Store'
+      - unzip -tq dist/impeccable-unity.zip
